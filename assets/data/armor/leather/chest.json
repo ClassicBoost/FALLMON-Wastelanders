@@ -1,0 +1,10 @@
+{
+	"name": "Leather Chestplate",
+	"image": "",
+
+    "defense": 1,
+	"ac": 1,
+
+	"cnd": 50,
+	"value": 50
+}

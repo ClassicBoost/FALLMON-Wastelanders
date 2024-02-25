@@ -1,0 +1,10 @@
+{
+	"name": "Leather Helmet",
+	"image": "",
+
+    "defense": 2,
+	"ac": 1,
+
+	"cnd": 35,
+	"value": 100
+}

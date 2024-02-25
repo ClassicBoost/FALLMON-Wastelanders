@@ -1,6 +1,6 @@
 package fallmon.gameObjects;
 
-typedef StupidFile =
+typedef EnemyFile =
 {
 	var name:String;
 	var image:String;
