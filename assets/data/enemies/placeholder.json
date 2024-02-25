@@ -1,0 +1,25 @@
+{
+	"name": "",
+	"image": "",
+    "type": [{
+        "primary": "",
+        "secondary": "",
+        "ghost": false
+    }],
+
+    "hp": 1,
+	"defense": 0,
+	"ac": 0,
+	"ap": 0,
+
+	"xp": 0,
+	"rewards": "",
+
+    "attacks": [
+        {
+        "name": "",
+        "type": "",
+        "damage": 0
+        }
+    ]
+}

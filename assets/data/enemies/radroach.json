@@ -1,0 +1,25 @@
+{
+	"name": "Radroach",
+	"image": "",
+    "type": [{
+        "primary": "",
+        "secondary": "",
+        "ghost": false
+    }],
+
+    "hp": 12,
+	"defense": 0,
+	"ac": 5,
+	"ap": 7,
+
+	"xp": 10,
+	"rewards": "",
+
+    "attacks": [
+        {
+        "name": "",
+        "type": "",
+        "damage": 4
+        }
+    ]
+}
