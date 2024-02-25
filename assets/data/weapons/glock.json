@@ -1,0 +1,8 @@
+{
+    "name": "glock",
+    "image": "",
+    "type": "gun",
+    "damage": 10,
+    "apCost": 3,
+    "value": 100
+}

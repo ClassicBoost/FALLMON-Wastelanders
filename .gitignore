@@ -1,0 +1,7 @@
+export/
+.vscode/
+APIStuff.hx
+mods/
+docs/_build
+wiplol/
+wiplol/*
