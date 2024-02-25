@@ -5,3 +5,4 @@ mods/
 docs/_build
 wiplol/
 wiplol/*
+exclude/

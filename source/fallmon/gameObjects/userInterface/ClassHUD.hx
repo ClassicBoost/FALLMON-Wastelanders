@@ -7,6 +7,7 @@ import fallmon.subStates.*;
 class ClassHUD extends FlxTypedGroup<FlxBasic>
 {
 	var healthTxt:FlxText;
+	var hpPercent:Float = 100;
 
 	// eep
 	public function new()
@@ -24,6 +25,20 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 	override public function update(elapsed:Float)
 	{
-		healthTxt.text = 'HP: ${PlayState.health}/${PlayState.maxHealth}';
+		updateText();
+
+		super.update(elapsed);
+	}
+
+	public function updateText()
+	{
+		hpPercent = Std.int((PlayState.health / PlayState.maxHealth) * 100);
+		healthTxt.text = '${PlayState.characterName} - HP: ${Std.int(PlayState.health)}/${PlayState.maxHealth}';
+		// healthTxt.text += ' ($hpPercent%)';
+
+		if (hpPercent <= 20)
+			healthTxt.color = 0xFFFF1E26; // Careful now...
+		else
+			healthTxt.color = 0xFFFFFFFF;
 	}
 }

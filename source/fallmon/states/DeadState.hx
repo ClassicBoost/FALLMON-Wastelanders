@@ -3,6 +3,7 @@ package fallmon.states;
 import fallmon.backend.*;
 import fallmon.gameObjects.*;
 import fallmon.gameObjects.userInterface.*;
+import fallmon.states.menus.*;
 
 class DeadState extends FlxState
 {
@@ -42,10 +43,16 @@ class DeadState extends FlxState
 			else
 				white.alpha += 0.01;
 
-			#if sys
 			if (tickRate < -500)
-				Sys.exit(1);
-			#end
+				//	Sys.exit(1);
+				exitState();
 		}
+	}
+
+	function exitState()
+	{
+		remove(deadTxt);
+		remove(white);
+		Main.switchState(this, new MainMenuState());
 	}
 }

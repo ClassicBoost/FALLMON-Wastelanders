@@ -13,6 +13,8 @@ class PlayState extends FlxState
 
 	private var allUIs:Array<FlxCamera> = [];
 
+	public static var characterName:String = 'PLAYER';
+
 	// health
 	public static var health:Float = 35;
 	public static var maxHealth:Float = 35;
@@ -54,7 +56,10 @@ class PlayState extends FlxState
 		}
 
 		if (health < 0)
-			Main.switchState(this, new DeadState());
+			exitState('dead');
+
+		if (health > maxHealth)
+			health = maxHealth;
 	}
 
 	public static function resetStats(?fromLevel:Bool = false)
@@ -70,6 +75,23 @@ class PlayState extends FlxState
 			showDebug = !showDebug;
 
 		if (FlxG.keys.justPressed.R)
-			health = -1;
+			health--;
+		if (FlxG.keys.justPressed.T)
+			health++;
+	}
+
+	public function exitState(swapState:String)
+	{
+		trace('exiting playstate');
+		// Delete objects
+
+		// Then swap state
+		switch (swapState)
+		{
+			case 'dead':
+				Main.switchState(this, new DeadState());
+			default:
+				Main.switchState(this, new PlayState());
+		}
 	}
 }

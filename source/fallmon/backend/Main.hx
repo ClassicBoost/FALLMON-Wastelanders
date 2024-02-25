@@ -3,6 +3,7 @@ package fallmon.backend;
 import fallmon.*;
 import fallmon.backend.*;
 import fallmon.states.menus.*;
+import flixel.FlxGame;
 
 class Main extends Sprite
 {
@@ -68,9 +69,10 @@ class Main extends Sprite
 		return input * (60 / FlxG.drawFramerate);
 	}
 
+	public static var lastState:FlxState;
+
 	public static function switchState(curState:FlxState, target:FlxState)
 	{
-		// Custom made Trans in
 		mainClassState = Type.getClass(target);
 
 		FlxG.switchState(target);
