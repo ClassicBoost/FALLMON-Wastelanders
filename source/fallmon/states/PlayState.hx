@@ -13,23 +13,15 @@ class PlayState extends FlxState
 
 	private var allUIs:Array<FlxCamera> = [];
 
-	public static var characterName:String = 'PLAYER';
-
-	// health
 	public static var health:Float = 35;
-	public static var maxHealth:Float = 35;
-
-	// stamina
 	public static var stamina:Float = 30;
-	public static var maxStamina:Float = 30;
-
-	// power points
 	public static var pp:Float = 10;
-	public static var maxPP:Float = 10;
+
+	public static var radiation:Float = 0;
 
 	override public function create()
 	{
-		super.create();
+		FlxG.camera.fade(FlxColor.BLACK, 0.2, true);
 
 		uiHUD = new ClassHUD();
 		add(uiHUD);
@@ -39,6 +31,8 @@ class PlayState extends FlxState
 			debugInfo = new DebugHUD();
 			add(debugInfo);
 		}
+
+		super.create();
 	}
 
 	override public function update(elapsed:Float)
@@ -58,15 +52,17 @@ class PlayState extends FlxState
 		if (health < 0)
 			exitState('dead');
 
-		if (health > maxHealth)
-			health = maxHealth;
+		if (health > Player.maxHealth)
+			health = Player.maxHealth;
 	}
 
 	public static function resetStats(?fromLevel:Bool = false)
 	{
-		health = maxHealth;
-		stamina = maxStamina;
-		pp = maxPP;
+		Player.recalculateStats(!fromLevel);
+
+		health = Player.maxHealth;
+		stamina = Player.maxStamina;
+		pp = Player.maxPP;
 	}
 
 	public function devModeFunctions()

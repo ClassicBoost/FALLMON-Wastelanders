@@ -1,6 +1,7 @@
 package fallmon.gameObjects.userInterface;
 
 import fallmon.backend.*;
+import fallmon.gameObjects.*;
 import fallmon.states.*;
 import fallmon.subStates.*;
 
@@ -21,9 +22,9 @@ class DebugHUD extends FlxTypedGroup<FlxBasic>
 	{
 		debugTxt.text = '${Main.gameVersion}\n';
 
-		debugTxt.text += '\nhealth: ${PlayState.health}\nmaxHealth: ${PlayState.maxHealth}\n';
-		debugTxt.text += '\nstamina: ${PlayState.stamina}\nmaxStamina: ${PlayState.maxStamina}\n';
-		debugTxt.text += '\npp: ${PlayState.pp}\nmaxPP: ${PlayState.maxPP}\n';
+		debugTxt.text += '\nhealth: ${PlayState.health}\nmaxHealth: ${Player.maxHealth}\n';
+		debugTxt.text += '\nstamina: ${PlayState.stamina}\nmaxStamina: ${Player.maxStamina}\n';
+		debugTxt.text += '\npp: ${PlayState.pp}\nmaxPP: ${Player.maxPP}\n';
 
 		debugTxt.text += '\n';
 	}

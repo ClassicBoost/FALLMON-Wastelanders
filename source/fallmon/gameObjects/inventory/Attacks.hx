@@ -14,7 +14,5 @@ typedef StupidFile =
 
 class Attacks
 {
-	public function new() {}
-
-	public function update(elapsed:Float) {}
+	// uhh
 }

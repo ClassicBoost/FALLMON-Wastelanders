@@ -23,7 +23,5 @@ typedef ArmorFile =
 
 class Items
 {
-	public function new() {}
-
-	public function update(elapsed:Float) {}
+	// uhh
 }

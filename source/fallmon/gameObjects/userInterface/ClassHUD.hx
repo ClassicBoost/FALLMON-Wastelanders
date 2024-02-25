@@ -1,6 +1,7 @@
 package fallmon.gameObjects.userInterface;
 
 import fallmon.backend.*;
+import fallmon.gameObjects.*;
 import fallmon.states.*;
 import fallmon.subStates.*;
 
@@ -14,8 +15,8 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 	{
 		super();
 
-		var cornerText:FlxText = new FlxText(0, 0, 0, '${Main.gameVersion}');
-		cornerText.setFormat(12, FlxColor.WHITE, LEFT);
+		var cornerText:FlxText = new FlxText(0, 0, 0, '${Main.gameVersion}\nUraniumEngine');
+		cornerText.setFormat(8, FlxColor.WHITE, LEFT);
 		add(cornerText);
 
 		healthTxt = new FlxText(5, 570, 0, '');
@@ -32,8 +33,8 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 	public function updateText()
 	{
-		hpPercent = Std.int((PlayState.health / PlayState.maxHealth) * 100);
-		healthTxt.text = '${PlayState.characterName} - HP: ${Std.int(PlayState.health)}/${PlayState.maxHealth}';
+		hpPercent = Std.int((PlayState.health / Player.maxHealth) * 100);
+		healthTxt.text = '${Player.characterName} - HP: ${Std.int(PlayState.health)}/${Player.maxHealth}';
 		// healthTxt.text += ' ($hpPercent%)';
 
 		if (hpPercent <= 20)

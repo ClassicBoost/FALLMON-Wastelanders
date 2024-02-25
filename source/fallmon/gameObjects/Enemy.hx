@@ -30,12 +30,7 @@ typedef Attacks =
 	var damage:Int;
 }
 
-class Enemy extends FlxSprite
+class Enemy
 {
-	public function new()
-	{
-		super();
-	}
-
-	override public function update(elapsed:Float) {}
+	// uhh
 }
