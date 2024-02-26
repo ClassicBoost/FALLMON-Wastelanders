@@ -35,6 +35,8 @@
 	<assets path="assets/images" preload="true" />
 	<assets path="assets/sounds" preload="true" />
 
+	<define name="CRASH_HANDLER" if="desktop release" />
+
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxedev set='webgl' if="html5" />
@@ -65,9 +67,9 @@
 	<!--Enable this for Nape release builds for a serious peformance improvement-->
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
 
-	<!-- Always enable Null Object Reference check for crash dialog -->
-	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
-	<haxedef name="HXCPP_STACK_LINE" if="release" />
+	<!--Used for Izzy Engine's crash handler-->
+	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER" />
+	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 

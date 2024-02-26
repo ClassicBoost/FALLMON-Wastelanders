@@ -1,0 +1,17 @@
+{
+    "type": "dragon",
+
+    "str": 4,
+    "per": 0,
+    "end": 1,
+    "cha": 1,
+    "int": 0,
+    "agl": 0,
+
+    "hp": 2,
+    "stamina": 5,
+    "pp": -5,
+
+    "radresist": 3,
+    "ac": 0
+}

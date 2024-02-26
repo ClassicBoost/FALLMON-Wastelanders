@@ -19,6 +19,7 @@ import flixel.util.FlxSort;
 import flixel.util.FlxTimer;
 import haxe.CallStack.StackItem;
 import haxe.CallStack;
+import haxe.Json;
 import haxe.io.Path;
 import lime.app.Application;
 import lime.utils.Assets;

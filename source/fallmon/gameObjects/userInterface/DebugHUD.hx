@@ -25,6 +25,14 @@ class DebugHUD extends FlxTypedGroup<FlxBasic>
 		debugTxt.text += '\nhealth: ${PlayState.health}\nmaxHealth: ${Player.maxHealth}\n';
 		debugTxt.text += '\nstamina: ${PlayState.stamina}\nmaxStamina: ${Player.maxStamina}\n';
 		debugTxt.text += '\npp: ${PlayState.pp}\nmaxPP: ${Player.maxPP}\n';
+		debugTxt.text += '\nradiation: ${PlayState.radiation}\n';
+		debugTxt.text += '\nstr: ${Player.strR}';
+		debugTxt.text += '\nper: ${Player.perR}';
+		debugTxt.text += '\nend: ${Player.endR}';
+		debugTxt.text += '\ncha: ${Player.chaR}';
+		debugTxt.text += '\nint: ${Player.intR}';
+		debugTxt.text += '\nagl: ${Player.aglR}';
+		debugTxt.text += '\nluk: ${Player.lukR}';
 
 		debugTxt.text += '\n';
 	}

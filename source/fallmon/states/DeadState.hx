@@ -44,8 +44,8 @@ class DeadState extends FlxState
 				white.alpha += 0.01;
 
 			if (tickRate < -500)
-				//	Sys.exit(1);
-				exitState();
+				Sys.exit(1);
+			//  exitState();
 		}
 	}
 

@@ -1,0 +1,17 @@
+{
+    "type": "electric",
+
+    "str": 1,
+    "per": 0,
+    "end": 0,
+    "cha": 0,
+    "int": 0,
+    "agl": 2,
+
+    "hp": -1,
+    "stamina": 5,
+    "pp": 0,
+
+    "radresist": 1,
+    "ac": 0
+}

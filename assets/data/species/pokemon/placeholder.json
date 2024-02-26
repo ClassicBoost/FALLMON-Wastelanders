@@ -1,0 +1,17 @@
+{
+    "type": "",
+
+    "str": 0,
+    "per": 0,
+    "end": 0,
+    "cha": 0,
+    "int": 0,
+    "agl": 0,
+
+    "hp": 0,
+    "stamina": 0,
+    "pp": 0,
+
+    "radresist": 0,
+    "ac": 0
+}

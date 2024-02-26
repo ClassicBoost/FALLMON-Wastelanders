@@ -67,10 +67,10 @@ class MainMenuState extends FlxState
 		if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE)
 			confirmAction();
 
-		if (currentOption > 2)
+		if (currentOption >= options.length)
 			currentOption = 0;
 		if (currentOption < 0)
-			currentOption = 2;
+			currentOption = options.length - 1;
 
 		super.update(elapsed);
 	}
@@ -84,21 +84,21 @@ class MainMenuState extends FlxState
 	function confirmAction()
 	{
 		FlxG.sound.play(AssetPaths.sound('menus/confirm'));
-		switch (currentOption)
+		switch (options[currentOption])
 		{
-			case 0: // PLAY
+			case 'play': // PLAY
 				FlxG.camera.fade(FlxColor.BLACK, 0.2, false, function()
 				{
 					exitState('play');
 				});
-			case 1: // CREDITS
+			case 'credits': // CREDITS
 
-			/*	case 2: // OPTIONS
+			case 'options': // OPTIONS
 				FlxG.camera.fade(FlxColor.BLACK, 0.2, false, function()
 				{
-					leaveState('options');
-			});*/
-			case 2: // HELP
+					exitState('options');
+				});
+			case 'help': // HELP
 		}
 	}
 
@@ -111,8 +111,9 @@ class MainMenuState extends FlxState
 		switch (swapState)
 		{
 			case 'play':
-				PlayState.resetStats(true);
-				Main.switchState(this, new PlayState());
+				//	PlayState.resetStats(true);
+				//	Main.switchState(this, new PlayState());
+				Main.switchState(this, new CharacterCreation());
 			default:
 				Main.switchState(this, new MainMenuState());
 		}

@@ -49,8 +49,14 @@ class PlayState extends FlxState
 				debugInfo.visible = false;
 		}
 
+		Player.recalculateStats(true);
+		Player.radiation(radiation);
+
 		if (health < 0)
 			exitState('dead');
+
+		if (radiation < 0)
+			radiation = 0;
 
 		if (health > Player.maxHealth)
 			health = Player.maxHealth;
@@ -58,7 +64,7 @@ class PlayState extends FlxState
 
 	public static function resetStats(?fromLevel:Bool = false)
 	{
-		Player.recalculateStats(!fromLevel);
+		Player.recalculateStats(fromLevel);
 
 		health = Player.maxHealth;
 		stamina = Player.maxStamina;
@@ -74,6 +80,11 @@ class PlayState extends FlxState
 			health--;
 		if (FlxG.keys.justPressed.T)
 			health++;
+
+		if (FlxG.keys.justPressed.Y)
+			radiation += 50;
+		if (FlxG.keys.justPressed.U)
+			radiation -= 50;
 	}
 
 	public function exitState(swapState:String)
