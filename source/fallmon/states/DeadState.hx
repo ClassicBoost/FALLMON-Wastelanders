@@ -24,6 +24,9 @@ class DeadState extends FlxState
 		deadTxt.alpha = 0;
 		add(deadTxt);
 
+		if (Player.characterAge < 16)
+			deadTxt.text = 'GAME OVER';
+
 		deadTxt.screenCenter();
 
 		tickRate = 60;

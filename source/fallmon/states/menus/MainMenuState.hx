@@ -3,6 +3,7 @@ package fallmon.states.menus;
 import fallmon.*;
 import fallmon.backend.*;
 import fallmon.states.menus.*;
+import fallmon.subStates.menus.*;
 
 class MainMenuState extends FlxState
 {
@@ -92,7 +93,7 @@ class MainMenuState extends FlxState
 					exitState('play');
 				});
 			case 'credits': // CREDITS
-
+				openSubState(new CreditsSubState());
 			case 'options': // OPTIONS
 				FlxG.camera.fade(FlxColor.BLACK, 0.2, false, function()
 				{

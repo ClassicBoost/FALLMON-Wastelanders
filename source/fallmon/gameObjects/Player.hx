@@ -43,6 +43,8 @@ class Player
 	public static var characterName:String = 'PLAYER';
 	public static var characterSpecies:String = null;
 	public static var characterType:String = null;
+	public static var characterAge:Int = 16;
+	public static var characterGender:String = 'male';
 
 	public static var maxHealth:Float = 35;
 	public static var maxStamina:Float = 30;

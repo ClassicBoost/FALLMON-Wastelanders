@@ -4,6 +4,7 @@ import fallmon.*;
 import fallmon.backend.*;
 import fallmon.gameObjects.Player;
 import fallmon.states.menus.*;
+import fallmon.subStates.menus.NameCreator;
 
 class CharacterCreation extends FlxState
 {
@@ -108,7 +109,10 @@ class CharacterCreation extends FlxState
 				if (currentOption < 0)
 					currentOption = traitsOptions.length - 1;
 			case 'others':
-				menuTxt.text = '';
+				menuTxt.text = (currentOption == 0 ? '> ' : '') + 'NAME: ${Player.characterName}' + seperator + (currentOption == 1 ? '< ' : '')
+					+ 'AGE: ${Player.characterAge} ' + (currentOption == 1 ? '>' : '') + seperator + (currentOption == 2 ? '> ' : '')
+					+ 'GENDER: ${Player.characterGender.toUpperCase()}' + seperator;
+
 				if (currentOption >= othersOptions.length)
 					currentOption = 0;
 				if (currentOption < 0)
@@ -172,6 +176,21 @@ class CharacterCreation extends FlxState
 	{
 		switch (subOption)
 		{
+			case 'others':
+				switch (othersOptions[currentOption])
+				{
+					case 'age':
+						if (add)
+						{
+							if (Player.characterAge < 50)
+								Player.characterAge++;
+						}
+						else
+						{
+							if (Player.characterAge > 10)
+								Player.characterAge--;
+						}
+				}
 			case 'special':
 				switch (specialOptions[currentOption])
 				{
@@ -309,6 +328,14 @@ class CharacterCreation extends FlxState
 				subOption = '';
 				descriptionTxt.text = '';
 				currentOption = 0;
+			case 'others':
+				switch (othersOptions[currentOption])
+				{
+					case 'name':
+						openSubState(new NameCreator());
+					case 'gender':
+						if (Player.characterGender == 'male') Player.characterGender = 'female'; else Player.characterGender = 'male';
+				}
 			default:
 				switch (options[currentOption])
 				{
