@@ -32,7 +32,8 @@ class DebugHUD extends FlxTypedGroup<FlxBasic>
 		debugTxt.text += '\ncha: ${Player.chaR}';
 		debugTxt.text += '\nint: ${Player.intR}';
 		debugTxt.text += '\nagl: ${Player.aglR}';
-		debugTxt.text += '\nluk: ${Player.lukR}';
+		debugTxt.text += '\nluk: ${Player.lukR}\n';
+		debugTxt.text += '\nmoveLimit: ${Player.moveLimit}';
 
 		debugTxt.text += '\n';
 	}

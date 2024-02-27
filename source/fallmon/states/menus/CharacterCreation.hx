@@ -28,7 +28,7 @@ class CharacterCreation extends FlxState
 	{
 		subOption = '';
 
-		speciesInfo = cast Json.parse(AssetPaths.getTextFromFile('data/species/pokemon/${(Player.characterSpecies == null ? 'placeholder' : Player.characterSpecies)}.json'));
+		loadDefaultSpecies();
 
 		menuTxt = new FlxText(20, 0, FlxG.width, "", 20);
 		menuTxt.setFormat(26, FlxColor.WHITE, CENTER);
@@ -169,7 +169,8 @@ class CharacterCreation extends FlxState
 		FlxG.sound.play(AssetPaths.sound('menus/select'));
 		currentOption += value;
 
-		descriptionTxt.text = '';
+		if (subOption != 'species')
+			descriptionTxt.text = '';
 	}
 
 	function leftOrRight(add:Bool)
@@ -358,6 +359,10 @@ class CharacterCreation extends FlxState
 		{
 			case '':
 				exitState('exit');
+			case 'species':
+				loadDefaultSpecies();
+				currentOption = 0;
+				subOption = '';
 			default:
 				currentOption = 0;
 				subOption = '';
@@ -382,4 +387,7 @@ class CharacterCreation extends FlxState
 			}
 		});
 	}
+
+	function loadDefaultSpecies()
+		speciesInfo = cast Json.parse(AssetPaths.getTextFromFile('data/species/pokemon/${(Player.characterSpecies == null ? 'placeholder' : Player.characterSpecies)}.json'));
 }
