@@ -14,7 +14,7 @@ class MainMenuState extends FlxState
 
 	public static var bgcolorshit:FlxColor = 0xFF1EFF8B;
 
-	var options:Array<String> = ['play', 'credits', 'help'];
+	var options:Array<String> = ['play', 'credits', 'options', 'help'];
 
 	// hi
 	override public function create():Void
@@ -45,19 +45,15 @@ class MainMenuState extends FlxState
 		switch (subOption)
 		{
 			default:
-				menuTxt.text = (currentOption == 0 ? '> ' : '')
-					+ 'PLAY'
-					+ seperator
-					+ (currentOption == 1 ? '> ' : '')
-					+ 'CREDITS'
-					+ seperator //	+ (currentOption == 2 ? '> ' : '') + 'OPTIONS' + seperator
-					+ (currentOption == 2 ? '> ' : '')
-					+ 'HELP'
-					+ seperator;
+				menuTxt.text = (currentOption == 0 ? '> ' : '') + 'PLAY' + seperator + (currentOption == 1 ? '> ' : '') + 'CREDITS' + seperator
+					+ (currentOption == 2 ? '> ' : '') + 'OPTIONS' + seperator + (currentOption == 3 ? '> ' : '') + 'HELP' + seperator;
 				//	+ (currentOption == 3 ? '> ' : '')
 				//	+ 'ERASE SAVE';
 				menuTitle.text = 'FALLMON Wastelanders';
 		}
+
+		menuTxt.antialiasing = Init.globalAnti;
+		menuTitle.antialiasing = Init.globalAnti;
 
 		if (FlxG.keys.justPressed.DOWN)
 			changeOptions(1);
@@ -111,6 +107,8 @@ class MainMenuState extends FlxState
 		// Then swap state
 		switch (swapState)
 		{
+			case 'options':
+				Main.switchState(this, new ConfigurationState());
 			case 'play':
 				//	PlayState.resetStats(true);
 				//	Main.switchState(this, new PlayState());

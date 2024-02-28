@@ -15,7 +15,7 @@ class DeadState extends FlxState
 
 	override public function create()
 	{
-		white = new FlxSprite().loadGraphic(AssetPaths.image('UI/white'));
+		white = new FlxSprite(0, 0).makeGraphic(3000, 3000, 0xFFFFFFFF);
 		white.alpha = 0;
 		add(white);
 

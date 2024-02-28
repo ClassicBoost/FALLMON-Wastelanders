@@ -58,9 +58,13 @@ class CharacterCreation extends FlxState
 				// Have a bad feeling that this might cause some lag
 				speciesInfo = cast Json.parse(AssetPaths.getTextFromFile('data/species/pokemon/${speciesOptions[currentOption]}.json'));
 
-				descriptionTxt.text = 'Type: ${speciesInfo.type.toUpperCase()}\n';
-				descriptionTxt.text += seperator
-					+ 'S ${speciesInfo.str} | P ${speciesInfo.per} | E ${speciesInfo.end} | C ${speciesInfo.cha} | I ${speciesInfo.int} | A ${speciesInfo.agl}';
+				descriptionTxt.text = 'Type: ${speciesInfo.type.toUpperCase()}\n\n';
+
+				descriptionTxt.text += 'STR ${speciesInfo.str} |'
+					+ (speciesInfo.per != 0 ? ' PER ${speciesInfo.per} |' : '')
+					+ ' END ${speciesInfo.end} | CHA ${speciesInfo.cha} | INT ${speciesInfo.int} | AGL ${speciesInfo.agl}'
+					+ (speciesInfo.luk != 0 ? ' | LUK ${speciesInfo.luk}' : '');
+
 				descriptionTxt.text += seperator + 'HP STM PP\n${speciesInfo.hp} ${speciesInfo.stamina} ${speciesInfo.pp}';
 				descriptionTxt.text += seperator + 'RAD RESIST: ${speciesInfo.radresist}';
 				descriptionTxt.text += seperator + 'AC: ${speciesInfo.ac}';
@@ -142,6 +146,7 @@ class CharacterCreation extends FlxState
 					currentOption = options.length - 1;
 		}
 
+		menuTxt.antialiasing = Init.globalAnti;
 		menuTxt.screenCenter();
 
 		if (FlxG.keys.justPressed.DOWN)
@@ -341,7 +346,14 @@ class CharacterCreation extends FlxState
 				switch (options[currentOption])
 				{
 					case 'start':
-						if (Player.characterSpecies != null) exitState('play'); else descriptionTxt.text = 'Choose a species';
+						if (Player.characterSpecies == null) descriptionTxt.text = 'Choose a species'; else if ((Player.str + speciesInfo.str <= 0)
+							|| (Player.per + speciesInfo.per <= 0)
+							|| (Player.end + speciesInfo.end <= 0)
+							|| (Player.cha + speciesInfo.cha <= 0)
+							|| (Player.int + speciesInfo.int <= 0)
+							|| (Player.agl + speciesInfo.agl <= 0)
+							|| (Player.luk + speciesInfo.luk <= 0))
+							descriptionTxt.text = 'A SPECIAL stat is equal or lower than 0. Increase to at least 1.'; else exitState('play');
 					case 'exit':
 						exitState('exit');
 					case 'species', 'special', 'traits', 'others':

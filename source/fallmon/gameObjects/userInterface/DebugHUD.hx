@@ -1,10 +1,5 @@
 package fallmon.gameObjects.userInterface;
 
-import fallmon.backend.*;
-import fallmon.gameObjects.*;
-import fallmon.states.*;
-import fallmon.subStates.*;
-
 class DebugHUD extends FlxTypedGroup<FlxBasic>
 {
 	var debugTxt:FlxText;
@@ -34,6 +29,8 @@ class DebugHUD extends FlxTypedGroup<FlxBasic>
 		debugTxt.text += '\nagl: ${Player.aglR}';
 		debugTxt.text += '\nluk: ${Player.lukR}\n';
 		debugTxt.text += '\nmoveLimit: ${Player.moveLimit}';
+		debugTxt.text += '\nac: ${Player.ac} | defaultAC: ${Player.defaultAC}';
+		debugTxt.text += '\ndefense: ${Player.defense} | defaultDefense: ${Player.defaultDefense}';
 
 		debugTxt.text += '\n';
 	}

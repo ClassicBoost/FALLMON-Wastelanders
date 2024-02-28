@@ -1,7 +1,5 @@
 package fallmon.gameObjects;
 
-import fallmon.backend.AssetPaths;
-
 typedef SpeciesShit =
 {
 	var type:String;
@@ -50,6 +48,12 @@ class Player
 	public static var maxStamina:Float = 30;
 	public static var maxPP:Float = 10;
 
+	public static var defaultAC:Int = 0;
+	public static var defaultDefense:Int = 0;
+
+	public static var ac:Int = 0;
+	public static var defense:Int = 0;
+
 	public static var speciesInfo:SpeciesShit;
 
 	public static var moveLimit:Int = 4;
@@ -75,7 +79,7 @@ class Player
 
 		if (!fromLevel)
 		{
-			Player.loadShit();
+			loadShit();
 
 			strR = str;
 			perR = per;
@@ -89,6 +93,14 @@ class Player
 		maxHealth = (20 + (endR * 2) + (strR));
 		maxStamina = (aglR * 10);
 		maxPP = (strR * 2);
+
+		defaultAC = Std.int((perR / 2) + (aglR / 2));
+		defaultDefense = Std.int(endR / 2);
+		if (!fromLevel)
+		{
+			ac = defaultAC;
+			defense = defaultDefense;
+		}
 
 		updateMoveLimit();
 

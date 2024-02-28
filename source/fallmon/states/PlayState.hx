@@ -6,7 +6,8 @@ import fallmon.gameObjects.userInterface.*;
 
 class PlayState extends FlxState
 {
-	public static var uiHUD:ClassHUD;
+	public static var uiHUD:ExplorationHUD;
+	public static var bgUI:Location;
 	public static var debugInfo:DebugHUD;
 
 	public static var showDebug:Bool = false;
@@ -19,11 +20,18 @@ class PlayState extends FlxState
 
 	public static var radiation:Float = 0;
 
+	public static var notificationTxt:FlxText;
+
 	override public function create()
 	{
 		FlxG.camera.fade(FlxColor.BLACK, 0.2, true);
 
-		uiHUD = new ClassHUD();
+		bgUI = new Location();
+		add(bgUI);
+
+		bgUI.changeLocation('placeholder');
+
+		uiHUD = new ExplorationHUD();
 		add(uiHUD);
 
 		if (Main.devMode)
@@ -31,6 +39,17 @@ class PlayState extends FlxState
 			debugInfo = new DebugHUD();
 			add(debugInfo);
 		}
+
+		var cornerText:FlxText = new FlxText(0, 0, 0, '${Main.gameVersion}\nUraniumEngine');
+		cornerText.setFormat(8, FlxColor.WHITE, LEFT);
+		cornerText.antialiasing = Init.globalAnti;
+		add(cornerText);
+
+		notificationTxt = new FlxText(0, 200, 0, '');
+		notificationTxt.setFormat(AssetPaths.font('terminal.ttf'), 24, FlxColor.WHITE, CENTER);
+		notificationTxt.antialiasing = Init.globalAnti;
+		notificationTxt.alpha = 0;
+		add(notificationTxt);
 
 		super.create();
 	}
@@ -49,6 +68,8 @@ class PlayState extends FlxState
 				debugInfo.visible = false;
 		}
 
+		notificationTxt.screenCenter(X);
+
 		Player.recalculateStats(true);
 		Player.radiation(radiation);
 
@@ -60,6 +81,23 @@ class PlayState extends FlxState
 
 		if (health > Player.maxHealth)
 			health = Player.maxHealth;
+
+		if (stamina > Player.maxStamina)
+			stamina = Player.maxStamina;
+
+		if (pp > Player.maxPP)
+			pp = Player.maxPP;
+
+		notificationTxt.alpha -= 0.01;
+	}
+
+	public static function showNotification(texxt:String = null, ?soundToPlay:String = null)
+	{
+		notificationTxt.text = texxt;
+		notificationTxt.alpha = 1;
+
+		if (soundToPlay != null)
+			FlxG.sound.play(AssetPaths.sound('ui/$soundToPlay'));
 	}
 
 	public static function resetStats(?fromLevel:Bool = false)
@@ -91,7 +129,7 @@ class PlayState extends FlxState
 	{
 		trace('exiting playstate');
 		// Delete objects
-
+		remove(uiHUD);
 		// Then swap state
 		switch (swapState)
 		{
