@@ -9,6 +9,8 @@ typedef LocationFile =
 
 	var possibleEnemies:Array<EnemyList>;
 
+	// From 1-100 (higher number means more likely to encounter). 0 or Safe difficulty will disable
+	var encounterChance:Int;
 	// 0 - Safe (ignores possibleEnemies), 1 - Easy, 2 - Moderate, 3 - Difficult, 4 - Insane, 5 - Please no
 	var difficulty:Int;
 }
@@ -58,5 +60,8 @@ class Location extends FlxTypedGroup<FlxBasic>
 			background.loadGraphic(AssetPaths.image('backgrounds/placeholder'));
 		else
 			background.loadGraphic(AssetPaths.image('backgrounds/$currentBG'));
+
+		if (locationShit.encounterChance > 0)
+			RollTime.roll(1, 100, 'encounter', '', locationShit.encounterChance);
 	}
 }

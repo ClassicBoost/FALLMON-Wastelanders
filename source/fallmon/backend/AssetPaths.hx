@@ -3,6 +3,7 @@ package fallmon.backend;
 import sys.FileSystem;
 import sys.io.File;
 
+// Used from Forever Engine
 class AssetPaths
 {
 	inline public static var SOUND_EXT = "ogg";

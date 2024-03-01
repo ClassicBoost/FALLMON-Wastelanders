@@ -2,11 +2,13 @@ package fallmon.states;
 
 import fallmon.backend.*;
 import fallmon.gameObjects.*;
+import fallmon.gameObjects.gameplay.*;
 import fallmon.gameObjects.userInterface.*;
 
 class PlayState extends FlxState
 {
 	public static var uiHUD:ExplorationHUD;
+	public static var combatLogs:CombatLog;
 	public static var bgUI:Location;
 	public static var debugInfo:DebugHUD;
 
@@ -29,16 +31,19 @@ class PlayState extends FlxState
 		bgUI = new Location();
 		add(bgUI);
 
-		bgUI.changeLocation('placeholder');
-
 		uiHUD = new ExplorationHUD();
 		add(uiHUD);
+
+		combatLogs = new CombatLog();
+		add(combatLogs);
 
 		if (Main.devMode)
 		{
 			debugInfo = new DebugHUD();
 			add(debugInfo);
 		}
+
+		bgUI.changeLocation('small-shack');
 
 		var cornerText:FlxText = new FlxText(0, 0, 0, '${Main.gameVersion}\nUraniumEngine');
 		cornerText.setFormat(8, FlxColor.WHITE, LEFT);
@@ -50,6 +55,8 @@ class PlayState extends FlxState
 		notificationTxt.antialiasing = Init.globalAnti;
 		notificationTxt.alpha = 0;
 		add(notificationTxt);
+
+		combatStatus(false);
 
 		super.create();
 	}
@@ -123,6 +130,16 @@ class PlayState extends FlxState
 			radiation += 50;
 		if (FlxG.keys.justPressed.U)
 			radiation -= 50;
+	}
+
+	public static function combatStatus(enter:Bool = true)
+	{
+		Actions.inCombat = enter;
+
+		combatLogs.combatStatus(enter);
+
+		if (enter) {}
+		else {}
 	}
 
 	public function exitState(swapState:String)

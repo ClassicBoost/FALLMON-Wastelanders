@@ -31,6 +31,7 @@ class DebugHUD extends FlxTypedGroup<FlxBasic>
 		debugTxt.text += '\nmoveLimit: ${Player.moveLimit}';
 		debugTxt.text += '\nac: ${Player.ac} | defaultAC: ${Player.defaultAC}';
 		debugTxt.text += '\ndefense: ${Player.defense} | defaultDefense: ${Player.defaultDefense}';
+		debugTxt.text += '\nrollGot: ${RollTime.rollGot}';
 
 		debugTxt.text += '\n';
 	}

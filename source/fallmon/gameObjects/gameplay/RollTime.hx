@@ -16,29 +16,38 @@ class RollTime
 
 	public static function roll(numberOfDice:Int = 1, maxNumber:Int = 20, ?type:String = '', ?advantage:String = '', ?targetNumber:Int = 0)
 	{
-		rollGot = FlxG.random.int(1, maxNumber);
+		new FlxTimer().start(0.5, function(fuckfuck:FlxTimer)
+		{
+			rollGot = FlxG.random.int(1, maxNumber);
 
-		if (advantage == 'a' && rollGot > advantageRoll)
-			advantageRoll = rollGot;
-		else if (advantage == 'd' && rollGot < advantageRoll)
-			advantageRoll = rollGot;
-		else
-			advantageRoll = rollGot;
+			if (advantage == 'a' && rollGot > advantageRoll)
+				advantageRoll = rollGot;
+			else if (advantage == 'd' && rollGot < advantageRoll)
+				advantageRoll = rollGot;
+			else
+				advantageRoll = rollGot;
 
-		addThemUp += advantageRoll;
+			addThemUp += advantageRoll;
 
-		if ((advantageRoll == 1 || advantageRoll == 20) && maxNumber == 20 && type == '')
-			isCrit = true;
-		else
-			isCrit = false;
+			if ((advantageRoll == 1 || advantageRoll == 20) && maxNumber == 20 && type == '')
+				isCrit = true;
+			else
+				isCrit = false;
 
-		if (addThemUp >= targetNumber || targetNumber == 0)
-			succeed(isCrit);
-		else
-			fail(isCrit);
+			if (addThemUp >= targetNumber || targetNumber == 0)
+				succeed(isCrit, type);
+			else
+				fail(isCrit, type);
+		});
 	}
 
-	public static function succeed(crit:Bool = false) {}
+	public static function succeed(crit:Bool = false, type:String = null)
+	{
+		switch (type) {}
+	}
 
-	public static function fail(crit:Bool = false) {}
+	public static function fail(crit:Bool = false, type:String = null)
+	{
+		switch (type) {}
+	}
 }

@@ -71,7 +71,7 @@ class Actions
 
 		if (turnOrder > 0)
 		{
-			new FlxTimer().start(0.6, function(fuckfuck:FlxTimer)
+			new FlxTimer().start(0.7, function(fuckfuck:FlxTimer)
 			{
 				turnOrder--;
 				turnEnded(false, turnOrder);

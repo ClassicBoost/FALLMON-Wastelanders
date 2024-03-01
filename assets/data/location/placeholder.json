@@ -6,5 +6,6 @@
 
     "possibleEnemies": [],
 
+    "encounterChance": 0,
     "difficulty": 0
 }
