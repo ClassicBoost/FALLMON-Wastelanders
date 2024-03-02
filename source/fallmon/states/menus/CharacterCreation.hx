@@ -334,6 +334,7 @@ class CharacterCreation extends FlxState
 				subOption = '';
 				descriptionTxt.text = '';
 				currentOption = 0;
+				Player.characterProtrait = speciesInfo.protrait;
 			case 'others':
 				switch (othersOptions[currentOption])
 				{

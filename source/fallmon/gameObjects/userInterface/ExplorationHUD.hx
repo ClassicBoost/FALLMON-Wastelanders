@@ -1,6 +1,7 @@
 package fallmon.gameObjects.userInterface;
 
 import fallmon.gameObjects.gameplay.*;
+import fallmon.gameObjects.userInterface.icons.ProtraitsIcon;
 
 class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 {
@@ -8,6 +9,8 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 	var staminaTxt:FlxText;
 	var ppTxt:FlxText;
 	var defensesTxt:FlxText;
+
+	public var playerProtrait:ProtraitsIcon;
 
 	public var lerpAC:Float = 0;
 
@@ -45,6 +48,12 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 		defensesTxt.antialiasing = Init.globalAnti;
 		defensesTxt.color = MainMenuState.bgcolorshit;
 		add(defensesTxt);
+
+		playerProtrait = new ProtraitsIcon(Player.characterProtrait, true);
+		playerProtrait.y = 480;
+		playerProtrait.x = 190;
+		playerProtrait.antialiasing = Init.globalAnti;
+		add(playerProtrait);
 
 		lerpAC = Player.ac;
 
@@ -143,21 +152,30 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 			defensesTxt.alpha = 1;
 		}
 
-		if (hpPercent <= 20)
-			healthTxt.color = 0xFFFF1E26; // Careful now...
-
 		if (stmPercent <= 50)
 			staminaTxt.color = 0xFFFF1E26;
 
 		if (ppPercent <= 50)
 			ppTxt.color = 0xFFFF6C71;
+
+		if (hpPercent <= 20)
+		{
+			healthTxt.color = 0xFFFF1E26; // Careful, now...
+			protraitUpdate(2, 0.1);
+			if (hpPercent <= 10)
+				protraitUpdate(13, 0.1);
+		}
 	}
 
-	override function add(Object:FlxBasic):FlxBasic
+	public function protraitUpdate(?iconToShow:Int = 0, ?iconLength:Float = 0)
 	{
-		if (Init.globalAnti && Std.isOfType(Object, FlxSprite))
-			cast(Object, FlxSprite).antialiasing = false;
-		return super.add(Object);
+		playerProtrait.animation.curAnim.curFrame = iconToShow;
+
+		if (iconLength > 0)
+			new FlxTimer().start(iconLength, function(fuckfuck:FlxTimer)
+			{
+				playerProtrait.animation.curAnim.curFrame = 0;
+			});
 	}
 
 	function boundTo(value:Float, min:Float, max:Float):Float

@@ -17,6 +17,8 @@ typedef SpeciesShit =
 
 	var radresist:Int;
 	var ac:Int;
+
+	var protrait:String;
 }
 
 class Player
@@ -43,6 +45,8 @@ class Player
 	public static var characterType:String = null;
 	public static var characterAge:Int = 16;
 	public static var characterGender:String = 'male';
+
+	public static var characterProtrait:String = null;
 
 	public static var maxHealth:Float = 35;
 	public static var maxStamina:Float = 30;

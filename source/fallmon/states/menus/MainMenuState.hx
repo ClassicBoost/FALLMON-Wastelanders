@@ -2,6 +2,7 @@ package fallmon.states.menus;
 
 import fallmon.*;
 import fallmon.backend.*;
+import fallmon.states.editors.*;
 import fallmon.states.menus.*;
 import fallmon.subStates.menus.*;
 
@@ -68,6 +69,9 @@ class MainMenuState extends FlxState
 			currentOption = 0;
 		if (currentOption < 0)
 			currentOption = options.length - 1;
+
+		if (FlxG.keys.justPressed.SEVEN)
+			Main.switchState(this, new SpeciesEditor());
 
 		super.update(elapsed);
 	}
