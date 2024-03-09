@@ -16,5 +16,16 @@
     "radresist": 2,
     "ac": 0,
 
+    "limbs": [
+        "head",
+        "chest",
+        "belly",
+        "left arm",
+        "right arm",
+        "left leg",
+        "right leg",
+        "tail"
+    ],
+
     "protrait": "snivy"
 }

@@ -64,6 +64,9 @@ class Player
 
 	public static var maxAP:Int = 7;
 
+	public static var speed:Float = 30; // Usually priority, kind of inititive
+	public static var accuracyMod:Float = 1;
+
 	public static function loadShit()
 	{
 		str += speciesInfo.str;
@@ -161,4 +164,27 @@ class Player
 		else
 			radEffect = 'none';
 	}
+}
+
+class Conditions
+{
+	// Accuracy
+	public static var armsCondition:Map<String, Int> = [
+		"none" => 0,
+		"damaged" => -5,
+		"sprained" => -20,
+		"broken" => -40,
+		"crippled" => -60,
+	];
+
+	// Speed
+	public static var legsCondition:Map<String, Int> = [
+		"none" => 0,
+		"damaged" => -1,
+		"sprained" => -5,
+		"broken" => -10,
+		"crippled" => -15,
+	];
+
+	function updateConditions() {}
 }

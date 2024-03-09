@@ -16,5 +16,16 @@
     "radresist": 1,
     "ac": 1,
 
+    "limbs": [
+        "head",
+        "chest",
+        "belly",
+        "left arm",
+        "right arm",
+        "left leg",
+        "right leg",
+        "tail"
+    ],
+
     "protrait": "oshawott"
 }

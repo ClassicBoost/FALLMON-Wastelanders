@@ -9,10 +9,13 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 	var staminaTxt:FlxText;
 	var ppTxt:FlxText;
 	var defensesTxt:FlxText;
+	var apTxt:FlxText;
 
 	public var playerProtrait:ProtraitsIcon;
 
 	public var lerpAC:Float = 0;
+
+	var ogAP:Int = 7;
 
 	// eep
 	public function new()
@@ -55,6 +58,12 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 		playerProtrait.antialiasing = Init.globalAnti;
 		add(playerProtrait);
 
+		apTxt = new FlxText(250, 500, 0, '');
+		apTxt.setFormat(AssetPaths.font('terminal.ttf'), 26, FlxColor.WHITE, LEFT);
+		apTxt.antialiasing = Init.globalAnti;
+		apTxt.color = MainMenuState.bgcolorshit;
+		add(apTxt);
+
 		lerpAC = Player.ac;
 
 		generateUIButtons();
@@ -62,6 +71,8 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 
 	var fightButton:FlxButton;
 	var passButton:FlxButton;
+	var invButton:FlxButton;
+	var actButton:FlxButton;
 
 	public function generateUIButtons():Void
 	{
@@ -69,11 +80,11 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 		{
 			Actions.attackList();
 		});
-		var invButton:FlxButton = new FlxButton(660, 490, "Inventory", function()
+		invButton = new FlxButton(660, 490, "Inventory", function()
 		{
 			Actions.playerInventory();
 		});
-		var actButton:FlxButton = new FlxButton(660, 520, "Action", function()
+		actButton = new FlxButton(660, 520, "Action", function()
 		{
 			Actions.actionsList();
 		});
@@ -81,9 +92,6 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 		{
 			Actions.passTurn();
 		});
-
-		actButton.color = MainMenuState.bgcolorshit;
-		invButton.color = MainMenuState.bgcolorshit;
 
 		fightButton.label.color = FlxColor.BLACK;
 		actButton.label.color = FlxColor.BLACK;
@@ -103,10 +111,23 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 		fightButton.color = 0xFFD63C3C;
 		passButton.color = 0xFFD63C3C;
 
+		actButton.color = 0xFFD63C3C;
+		invButton.color = 0xFFD63C3C;
+
 		if (Actions.inCombat)
 		{
-			fightButton.color = MainMenuState.bgcolorshit;
-			passButton.color = MainMenuState.bgcolorshit;
+			if (Actions.playerTurn)
+			{
+				fightButton.color = MainMenuState.bgcolorshit;
+				passButton.color = MainMenuState.bgcolorshit;
+				actButton.color = MainMenuState.bgcolorshit;
+				invButton.color = MainMenuState.bgcolorshit;
+			}
+		}
+		else
+		{
+			actButton.color = MainMenuState.bgcolorshit;
+			invButton.color = MainMenuState.bgcolorshit;
 		}
 
 		//	lerpAC = Math.floor(FlxMath.lerp(lerpAC, Player.ac, boundTo(elapsed * 5, 0, 1)));
@@ -141,15 +162,19 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 		staminaTxt.color = MainMenuState.bgcolorshit;
 		ppTxt.color = MainMenuState.bgcolorshit;
 
+		apTxt.text = '${Actions.actionPoints}/${Player.maxAP} AP';
+
 		staminaTxt.alpha = 0.4;
 		ppTxt.alpha = 0.4;
 		defensesTxt.alpha = 0.4;
+		apTxt.alpha = 0.2;
 
 		if (Actions.inCombat)
 		{
 			staminaTxt.alpha = 1;
 			ppTxt.alpha = 1;
 			defensesTxt.alpha = 1;
+			apTxt.alpha = 1;
 		}
 
 		if (stmPercent <= 50)
@@ -164,6 +189,15 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 			protraitUpdate(2, 0.1);
 			if (hpPercent <= 10)
 				protraitUpdate(13, 0.1);
+		}
+
+		if (ogAP != Actions.actionPoints)
+		{
+			FlxTween.cancelTweensOf(apTxt);
+			apTxt.scale.set(1.075, 1.075);
+			FlxTween.tween(apTxt, {"scale.x": 1, "scale.y": 1}, 0.25, {ease: FlxEase.cubeOut});
+
+			ogAP = Actions.actionPoints;
 		}
 	}
 

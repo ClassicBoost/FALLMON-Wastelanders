@@ -156,8 +156,6 @@ class SpeciesEditor extends FlxState
 		else if (id == FlxUINumericStepper.CHANGE_EVENT && (sender is FlxUINumericStepper)) {}
 	}
 
-	private function saveStuff() {}
-
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
@@ -187,6 +185,75 @@ class SpeciesEditor extends FlxState
 
 		if (FlxG.keys.justPressed.ESCAPE)
 			Main.switchState(this, new MainMenuState());
+	}
+
+	var _file:FileReference;
+
+	function onSaveComplete(_):Void
+	{
+		_file.removeEventListener(Event.COMPLETE, onSaveComplete);
+		_file.removeEventListener(Event.CANCEL, onSaveCancel);
+		_file.removeEventListener(IOErrorEvent.IO_ERROR, onSaveError);
+		_file = null;
+		FlxG.log.notice("Successfully saved file.");
+	}
+
+	/**
+		* Called when the save file dialog is cancelled.
+		*/
+	function onSaveCancel(_):Void
+	{
+		_file.removeEventListener(Event.COMPLETE, onSaveComplete);
+		_file.removeEventListener(Event.CANCEL, onSaveCancel);
+		_file.removeEventListener(IOErrorEvent.IO_ERROR, onSaveError);
+		_file = null;
+	}
+
+	/**
+		* Called if there is an error while saving the gameplay recording.
+		*/
+	function onSaveError(_):Void
+	{
+		_file.removeEventListener(Event.COMPLETE, onSaveComplete);
+		_file.removeEventListener(Event.CANCEL, onSaveCancel);
+		_file.removeEventListener(IOErrorEvent.IO_ERROR, onSaveError);
+		_file = null;
+		FlxG.log.error("Problem saving file");
+	}
+
+	function saveStuff()
+	{
+		var json = {
+			"type": typingShit,
+
+			"str": strengthNUM.value,
+			"per": perceptionNUM.value,
+			"end": enduranceNUM.value,
+			"cha": charismaNUM.value,
+			"int": intelligenceNUM.value,
+			"agl": agilityNUM.value,
+			"luk": luckNUM.value,
+
+			"hp": 0,
+			"stamina": 0,
+			"pp": 0,
+
+			"ac": 0,
+			"radresist": 0,
+
+			"protrait": protraitName
+		};
+
+		var data:String = Json.stringify(json, "\t");
+
+		if (data.length > 0)
+		{
+			_file = new FileReference();
+			_file.addEventListener(Event.COMPLETE, onSaveComplete);
+			_file.addEventListener(Event.CANCEL, onSaveCancel);
+			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
+			_file.save(data, nameSpeciesShit + ".json");
+		}
 	}
 
 	function ClipboardAdd(prefix:String = ''):String

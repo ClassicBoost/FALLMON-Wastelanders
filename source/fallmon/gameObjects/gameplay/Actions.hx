@@ -65,6 +65,9 @@ class Actions
 		{
 			turnOrder--;
 
+			if (numberOfPeople < 2)
+				inCombat = false;
+
 			if (turnOrder < 1)
 				startTurn();
 		}

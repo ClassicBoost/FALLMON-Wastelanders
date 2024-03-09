@@ -16,5 +16,15 @@
     "radresist": 0,
     "ac": 0,
 
+    "limbs": [
+        "head",
+        "chest",
+        "belly",
+        "left arm",
+        "right arm",
+        "left leg",
+        "right leg"
+    ],
+
     "protrait": ""
 }

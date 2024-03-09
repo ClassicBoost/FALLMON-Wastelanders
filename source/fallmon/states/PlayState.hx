@@ -58,6 +58,8 @@ class PlayState extends FlxState
 
 		combatStatus(false);
 
+		Actions.actionPoints = Player.maxAP;
+
 		super.create();
 	}
 
@@ -130,6 +132,9 @@ class PlayState extends FlxState
 			radiation += 50;
 		if (FlxG.keys.justPressed.U)
 			radiation -= 50;
+
+		if (FlxG.keys.justPressed.G)
+			Actions.inCombat = !Actions.inCombat;
 	}
 
 	public static function combatStatus(enter:Bool = true)
