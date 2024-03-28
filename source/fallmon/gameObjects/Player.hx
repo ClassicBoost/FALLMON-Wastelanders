@@ -80,6 +80,8 @@ class Player
 
 	public static var maxMoves:Map<Int, Int> = [8 => 10, 7 => 9, 6 => 8, 5 => 7, 4 => 4, 3 => 3,];
 
+	public static var hpPercent:Int = 100;
+
 	public static function recalculateStats(?fromLevel:Bool = true)
 	{
 		speciesInfo = cast Json.parse(AssetPaths.getTextFromFile('data/species/pokemon/$characterSpecies.json'));
@@ -111,7 +113,20 @@ class Player
 
 		updateMoveLimit();
 
+		hpPercent = Std.int((PlayState.health / maxHealth) * 100);
+
 		maxAP = Std.int(5 + (aglR / 2));
+
+		if (hpPercent <= 50)
+		{
+			maxAP -= 1;
+			if (hpPercent <= 25)
+			{
+				maxAP -= 1;
+				if (PlayState.health <= 4)
+					maxAP -= 1;
+			}
+		}
 	}
 
 	public static function updateMoveLimit()

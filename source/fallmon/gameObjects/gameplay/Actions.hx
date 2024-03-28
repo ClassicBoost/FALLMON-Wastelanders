@@ -1,5 +1,7 @@
 package fallmon.gameObjects.gameplay;
 
+import fallmon.gameObjects.Enemy.EnemyFile;
+import fallmon.gameObjects.Enemy;
 import fallmon.gameObjects.userInterface.ExplorationHUD;
 
 class Actions
@@ -60,6 +62,9 @@ class Actions
 			turnOrder = numberOfPeople;
 			Player.ac += Std.int(actionPoints * (ExplorationHUD.stmPercent / 100)); // Just so you can't abuse this if you're tired
 			actionPoints = 0;
+
+			if (numberOfPeople > 1)
+				enemyDecision();
 		}
 		else
 		{
@@ -82,5 +87,13 @@ class Actions
 		}
 		else
 			return;
+	}
+
+	public static var enemyInfo:EnemyFile;
+
+	public static function enemyDecision()
+	{
+		enemyInfo = cast Json.parse(AssetPaths.getTextFromFile('data/enemies/${Location.broWho}.json'));
+		return;
 	}
 }

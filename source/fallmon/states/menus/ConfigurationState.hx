@@ -13,6 +13,7 @@ class ConfigurationState extends FlxState
 	private var subOption:String = '';
 	var menuTitle:FlxText;
 
+	var preferencesSettings:Array<String> = ['debug mode'];
 	var appearanceSettings:Array<String> = ['smooth filter'];
 
 	var categories:Array<String> = ['preferences', 'appearance', 'exit'];
@@ -22,16 +23,17 @@ class ConfigurationState extends FlxState
 		subOption = '';
 
 		menuTxt = new FlxText(20, 0, FlxG.width, "", 20);
-		menuTxt.setFormat(26, FlxColor.WHITE, CENTER);
+		menuTxt.setFormat("Share Tech Mono", 26, FlxColor.WHITE, CENTER);
 		menuTxt.screenCenter(Y);
 		add(menuTxt);
 
-		menuTitle = new FlxText(20, 200, FlxG.width, "CONFIGURATION", 20);
-		menuTitle.setFormat("VCR OSD Mono", 40, FlxColor.WHITE, CENTER);
+		menuTitle = new FlxText(20, 150, FlxG.width, "CONFIGURATION", 20);
+		menuTitle.setFormat("Share Tech Mono", 40, FlxColor.WHITE, CENTER);
+		menuTitle.screenCenter(X);
 		add(menuTitle);
 
 		descriptionTxt = new FlxText(20, 450, FlxG.width, "", 20);
-		descriptionTxt.setFormat("VCR OSD Mono", 18, FlxColor.WHITE, LEFT);
+		descriptionTxt.setFormat("Share Tech Mono", 18, FlxColor.WHITE, LEFT);
 		add(descriptionTxt);
 
 		FlxG.camera.fade(FlxColor.BLACK, 0.2, true);
@@ -45,6 +47,13 @@ class ConfigurationState extends FlxState
 	{
 		switch (subOption)
 		{
+			case 'preferences':
+				menuTxt.text = (currentOption == 0 ? '> ' : '') + 'Debug Mode: ${Init.debugMode}';
+
+				if (currentOption >= appearanceSettings.length)
+					currentOption = 0;
+				if (currentOption < 0)
+					currentOption = appearanceSettings.length - 1;
 			case 'appearance':
 				menuTxt.text = (currentOption == 0 ? '> ' : '') + 'Smooth Filter: ${Init.globalAnti}';
 
@@ -95,6 +104,11 @@ class ConfigurationState extends FlxState
 		switch (subOption)
 		{
 			case 'preferences':
+				switch (appearanceSettings[currentOption])
+				{
+					case 'debug mode':
+						FlxG.save.data.debugMode = !FlxG.save.data.debugMode;
+				}
 			case 'appearance':
 				switch (appearanceSettings[currentOption])
 				{

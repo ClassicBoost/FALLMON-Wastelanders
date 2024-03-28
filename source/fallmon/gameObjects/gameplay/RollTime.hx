@@ -48,6 +48,10 @@ class RollTime
 
 	public static function fail(crit:Bool = false, type:String = null)
 	{
-		switch (type) {}
+		switch (type)
+		{
+			case 'encounter':
+				Location.encounterMoment();
+		}
 	}
 }

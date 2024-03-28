@@ -126,8 +126,11 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 		}
 		else
 		{
+			Actions.actionPoints = Player.maxAP;
 			actButton.color = MainMenuState.bgcolorshit;
 			invButton.color = MainMenuState.bgcolorshit;
+			PlayState.stamina += 0.1;
+			PlayState.pp += 0.005;
 		}
 
 		//	lerpAC = Math.floor(FlxMath.lerp(lerpAC, Player.ac, boundTo(elapsed * 5, 0, 1)));
@@ -140,15 +143,12 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 		super.update(elapsed);
 	}
 
-	var hpPercent:Float = 1;
-
 	public static var stmPercent:Float = 1;
 
 	var ppPercent:Float = 1;
 
 	public function updateText()
 	{
-		hpPercent = Std.int((PlayState.health / Player.maxHealth) * 100);
 		stmPercent = Std.int((PlayState.stamina / Player.maxStamina) * 100);
 		ppPercent = Std.int((PlayState.pp / Player.maxPP) * 100);
 
@@ -156,7 +156,7 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 		staminaTxt.text = 'STM: ${Std.int(PlayState.stamina)}/${Player.maxStamina}';
 		ppTxt.text = 'PP: ${Std.int(PlayState.pp)}/${Player.maxPP}';
 		defensesTxt.text = 'AC: ${Std.int(lerpAC)} // Defense: ${Player.defense}';
-		// healthTxt.text += ' ($hpPercent%)';
+		// healthTxt.text += ' (${Player.hpPercent}%)';
 
 		healthTxt.color = MainMenuState.bgcolorshit;
 		staminaTxt.color = MainMenuState.bgcolorshit;
@@ -183,11 +183,11 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 		if (ppPercent <= 50)
 			ppTxt.color = 0xFFFF6C71;
 
-		if (hpPercent <= 20)
+		if (Player.hpPercent <= 25)
 		{
 			healthTxt.color = 0xFFFF1E26; // Careful, now...
 			protraitUpdate(2, 0.1);
-			if (hpPercent <= 10)
+			if (PlayState.health <= 4)
 				protraitUpdate(13, 0.1);
 		}
 

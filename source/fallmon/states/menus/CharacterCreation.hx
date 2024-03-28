@@ -30,12 +30,13 @@ class CharacterCreation extends FlxState
 
 		loadDefaultSpecies();
 
-		menuTxt = new FlxText(20, 0, FlxG.width, "", 20);
-		menuTxt.setFormat(26, FlxColor.WHITE, CENTER);
+		menuTxt = new FlxText(20, 0, FlxG.width, "\n\n\n\n\n\n", 20);
+		menuTxt.setFormat("Share Tech Mono", 26, FlxColor.WHITE, CENTER);
+		menuTxt.screenCenter();
 		add(menuTxt);
 
 		descriptionTxt = new FlxText(20, 450, FlxG.width, "", 20);
-		descriptionTxt.setFormat("VCR OSD Mono", 18, FlxColor.WHITE, LEFT);
+		descriptionTxt.setFormat("Share Tech Mono", 18, FlxColor.WHITE, LEFT);
 		add(descriptionTxt);
 
 		FlxG.camera.fade(FlxColor.BLACK, 0.2, true);
@@ -106,6 +107,15 @@ class CharacterCreation extends FlxState
 					+ 'LUCK: ${Player.luk} (${(Player.luk + speciesInfo.luk)}) '
 					+ (currentOption == 6 ? '>' : '');
 				menuTxt.text += seperator + '\nPOINTS LEFT: $pointsRemaining';
+
+				if ((Player.str + speciesInfo.str <= 0)
+					|| (Player.per + speciesInfo.per <= 0)
+					|| (Player.end + speciesInfo.end <= 0)
+					|| (Player.cha + speciesInfo.cha <= 0)
+					|| (Player.int + speciesInfo.int <= 0)
+					|| (Player.agl + speciesInfo.agl <= 0)
+					|| (Player.luk + speciesInfo.luk <= 0))
+					menuTxt.text += '\n/!\\ A SPECIAL STAT IS AT ZERO! /!\\';
 			case 'traits':
 				menuTxt.text = '';
 				if (currentOption >= traitsOptions.length)
@@ -147,7 +157,7 @@ class CharacterCreation extends FlxState
 		}
 
 		menuTxt.antialiasing = Init.globalAnti;
-		menuTxt.screenCenter();
+		menuTxt.screenCenter(X);
 
 		if (FlxG.keys.justPressed.DOWN)
 			changeOptions(1);
@@ -359,6 +369,7 @@ class CharacterCreation extends FlxState
 						exitState('exit');
 					case 'species', 'special', 'traits', 'others':
 						subOption = options[currentOption];
+						menuTxt.screenCenter();
 				}
 				currentOption = 0;
 		}
@@ -368,6 +379,7 @@ class CharacterCreation extends FlxState
 	{
 		FlxG.sound.play(AssetPaths.sound('menus/cancel'));
 		descriptionTxt.text = '';
+		menuTxt.screenCenter();
 		switch (subOption)
 		{
 			case '':

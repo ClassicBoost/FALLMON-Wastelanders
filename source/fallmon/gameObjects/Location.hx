@@ -29,11 +29,13 @@ typedef EnemyList =
 
 class Location extends FlxTypedGroup<FlxBasic>
 {
-	var background:FlxSprite;
+	public static var background:FlxSprite;
 
-	var currentBG:String = 'placeholder';
+	public static var currentBG:String = 'placeholder';
 
-	var locationShit:LocationFile;
+	public static var locationShit:LocationFile;
+
+	public static var broWho:String = '';
 
 	public function new()
 	{
@@ -46,7 +48,7 @@ class Location extends FlxTypedGroup<FlxBasic>
 		add(background);
 	}
 
-	public function changeLocation(file:String = null)
+	public static function changeLocation(file:String = null)
 	{
 		if (OpenFlAssets.exists('assets/data/location/$file.json'))
 			locationShit = cast Json.parse(AssetPaths.getTextFromFile('data/location/$file.json'));
@@ -61,7 +63,15 @@ class Location extends FlxTypedGroup<FlxBasic>
 		else
 			background.loadGraphic(AssetPaths.image('backgrounds/$currentBG'));
 
-		if (locationShit.encounterChance > 0)
+		if (locationShit.encounterChance > 0 && locationShit.difficulty > 0)
 			RollTime.roll(1, 100, 'encounter', '', locationShit.encounterChance);
+	}
+
+	public static function encounterMoment()
+	{
+		// IM DUMB AND IDK HOW TO GET THIS TO WORK
+		var whoCouldThatBe:Int = FlxG.random.int(0, locationShit.possibleEnemies.length - 1);
+		//	var theirLevel:Int = FlxG.random.int(locationShit.possibleEnemies.level_min, locationShit.possibleEnemies.level_max);
+		var theirLevel:Int = 1;
 	}
 }

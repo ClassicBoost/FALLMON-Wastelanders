@@ -23,7 +23,7 @@ class MainMenuState extends FlxState
 		subOption = '';
 
 		menuTxt = new FlxText(20, 0, FlxG.width, "", 20);
-		menuTxt.setFormat(26, FlxColor.WHITE, LEFT);
+		menuTxt.setFormat("Share Tech Mono", 26, FlxColor.WHITE, LEFT);
 		menuTxt.screenCenter(Y);
 		add(menuTxt);
 
@@ -71,7 +71,12 @@ class MainMenuState extends FlxState
 			currentOption = options.length - 1;
 
 		if (FlxG.keys.justPressed.SEVEN)
-			Main.switchState(this, new SpeciesEditor());
+		{
+			FlxG.camera.fade(FlxColor.BLACK, 0.2, false, function()
+			{
+				exitState('editor');
+			});
+		}
 
 		super.update(elapsed);
 	}
@@ -117,6 +122,9 @@ class MainMenuState extends FlxState
 				//	PlayState.resetStats(true);
 				//	Main.switchState(this, new PlayState());
 				Main.switchState(this, new CharacterCreation());
+			case 'editor':
+				Main.switchState(this, new DebugMenu());
+			//	Main.switchState(this, new SpeciesEditor());
 			default:
 				Main.switchState(this, new MainMenuState());
 		}

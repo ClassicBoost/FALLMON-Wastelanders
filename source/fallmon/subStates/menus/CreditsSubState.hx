@@ -12,7 +12,7 @@ class CreditsSubState extends FlxSubState
 
 	var overlayBG:FlxSprite;
 
-	var credits:Array<String> = ['Classic1926', 'Nintendo', 'Bethesda'];
+	var credits:Array<String> = ['Classic1926', 'SpriteCollab', 'Nintendo', 'Bethesda'];
 
 	public function new()
 	{
@@ -43,16 +43,18 @@ class CreditsSubState extends FlxSubState
 
 		descriptionTxt.screenCenter(X);
 
-		menuTxt.text = (currentOption == 0 ? '> ' : '') + 'Classic1926' + seperator + seperator + (currentOption == 1 ? '> ' : '') + 'Nintendo' + seperator
-			+ (currentOption == 2 ? '> ' : '') + 'Bethesda' + seperator;
+		menuTxt.text = (currentOption == 0 ? '> ' : '') + 'Classic1926' + seperator + seperator + (currentOption == 1 ? '> ' : '') + 'SpriteCollab'
+			+ seperator + (currentOption == 2 ? '> ' : '') + 'Nintendo' + seperator + (currentOption == 3 ? '> ' : '') + 'Bethesda' + seperator;
 
-		switch (credits[currentOption])
+		switch (credits[currentOption].toLowerCase())
 		{
-			case 'Classic1926':
-				descriptionTxt.text = 'Made everything';
-			case 'Nintendo':
+			case 'classic1926':
+				descriptionTxt.text = 'Director, Coder, Designer';
+			case 'spritecollab':
+				descriptionTxt.text = 'Protraits usage';
+			case 'nintendo':
 				descriptionTxt.text = 'Made Pokemon'; // I'm fucked
-			case 'Bethesda':
+			case 'bethesda':
 				descriptionTxt.text = 'Made Fallout';
 		}
 

@@ -43,7 +43,7 @@ class PlayState extends FlxState
 			add(debugInfo);
 		}
 
-		bgUI.changeLocation('small-shack');
+		Location.changeLocation('small-shack');
 
 		var cornerText:FlxText = new FlxText(0, 0, 0, '${Main.gameVersion}\nUraniumEngine');
 		cornerText.setFormat(8, FlxColor.WHITE, LEFT);
@@ -152,6 +152,8 @@ class PlayState extends FlxState
 		trace('exiting playstate');
 		// Delete objects
 		remove(uiHUD);
+		remove(bgUI);
+		remove(combatLogs);
 		// Then swap state
 		switch (swapState)
 		{
