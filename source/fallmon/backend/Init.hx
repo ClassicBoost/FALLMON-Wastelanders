@@ -20,14 +20,15 @@ class Init extends FlxState
 
 	public static function loadSettings():Void
 	{
-		if (FlxG.save.data.globalAntialiasing == null)
-			FlxG.save.data.globalAntialiasing = globalAnti;
+		if (FlxG.save.data.globalAntialiasing == null) FlxG.save.data.globalAntialiasing = globalAnti;
 
-		if (FlxG.save.data.debugMode == null)
-			FlxG.save.data.debugMode = debugMode;
+		if (FlxG.save.data.debugMode == null) FlxG.save.data.debugMode = debugMode;
 
 		globalAnti = FlxG.save.data.globalAntialiasing;
 		debugMode = FlxG.save.data.debugMode;
+
+		if (FlxG.save.data.volume != null) FlxG.sound.volume = FlxG.save.data.volume;
+		if (FlxG.save.data.mute != null) FlxG.sound.muted = FlxG.save.data.mute;
 	}
 
 	public static function saveSettings():Void

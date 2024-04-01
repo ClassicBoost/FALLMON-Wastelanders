@@ -129,8 +129,6 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 			Actions.actionPoints = Player.maxAP;
 			actButton.color = MainMenuState.bgcolorshit;
 			invButton.color = MainMenuState.bgcolorshit;
-			PlayState.stamina += 0.1;
-			PlayState.pp += 0.005;
 		}
 
 		//	lerpAC = Math.floor(FlxMath.lerp(lerpAC, Player.ac, boundTo(elapsed * 5, 0, 1)));
@@ -183,6 +181,11 @@ class ExplorationHUD extends FlxTypedGroup<FlxBasic>
 		if (ppPercent <= 50)
 			ppTxt.color = 0xFFFF6C71;
 
+		if (PlayState.radiation >= 500) {
+			protraitUpdate(8, 0.1);
+			if (PlayState.radiation >= 700)
+				protraitUpdate(13, 0.1);
+		}
 		if (Player.hpPercent <= 25)
 		{
 			healthTxt.color = 0xFFFF1E26; // Careful, now...

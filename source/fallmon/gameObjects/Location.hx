@@ -30,6 +30,7 @@ typedef EnemyList =
 class Location extends FlxTypedGroup<FlxBasic>
 {
 	public static var background:FlxSprite;
+	public static var sky:FlxSprite;
 
 	public static var currentBG:String = 'placeholder';
 
@@ -42,6 +43,11 @@ class Location extends FlxTypedGroup<FlxBasic>
 		super();
 
 		locationShit = cast Json.parse(AssetPaths.getTextFromFile('data/location/placeholder.json'));
+
+		sky = new FlxSprite (20,25);
+		sky.loadGraphic(AssetPaths.image('backgrounds/mood/day'));
+		sky.antialiasing = Init.globalAnti;
+		add(sky);
 
 		background = new FlxSprite(20, 25);
 		background.antialiasing = Init.globalAnti;

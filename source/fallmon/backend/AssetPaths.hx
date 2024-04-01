@@ -291,6 +291,9 @@ class AssetPaths
 	inline static public function image(key:String, ?library:String, ?textureCompression:Bool = false)
 	{
 		var returnAsset:FlxGraphic = returnGraphic(key, library, textureCompression);
+		if (!sys.FileSystem.exists('assets/images/$key.png'))
+			returnAsset = returnGraphic('icons/missing', library, textureCompression);
+
 		return returnAsset;
 	}
 

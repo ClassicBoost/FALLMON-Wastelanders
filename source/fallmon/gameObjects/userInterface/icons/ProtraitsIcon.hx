@@ -20,10 +20,7 @@ class ProtraitsIcon extends FlxSprite
 	{
 		var iconPath = char;
 		if (!FileSystem.exists(AssetPaths.getPath('images/icons/protraits/' + iconPath + '.png', IMAGE)))
-		{
 			iconPath = 'unown';
-			trace('$char icon trying $iconPath instead you fuck');
-		}
 
 		var iconGraphic:FlxGraphic = AssetPaths.image('icons/protraits/' + iconPath);
 		loadGraphic(iconGraphic, true, 40, 40);

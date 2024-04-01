@@ -97,6 +97,14 @@ class PlayState extends FlxState
 		if (pp > Player.maxPP)
 			pp = Player.maxPP;
 
+		if ((Player.strR <= 0) || (Player.perR <= 0) || (Player.endR <= 0) || (Player.chaR <= 0) || (Player.intR <= 0) || (Player.aglR <= 0) || (Player.lukR <= 0))
+			healthCall(-99, true);
+
+		if (!Actions.inCombat) {
+			if (stamina < Player.maxStamina) stamina += (0.1 * (Player.hpPercent / 100));
+			if (pp < Player.maxPP) pp += 0.005;
+		}
+
 		notificationTxt.alpha -= 0.01;
 	}
 
@@ -124,9 +132,9 @@ class PlayState extends FlxState
 			showDebug = !showDebug;
 
 		if (FlxG.keys.justPressed.R)
-			health--;
+			healthCall(-1, true);
 		if (FlxG.keys.justPressed.T)
-			health++;
+			healthCall(1, false);
 
 		if (FlxG.keys.justPressed.Y)
 			radiation += 50;
@@ -135,6 +143,11 @@ class PlayState extends FlxState
 
 		if (FlxG.keys.justPressed.G)
 			Actions.inCombat = !Actions.inCombat;
+	}
+
+	public static function healthCall(hpNum:Int = 0, ?damage:Bool = false) {
+		health += hpNum;
+		if (damage) FlxG.camera.shake(0.02, 0.1);
 	}
 
 	public static function combatStatus(enter:Bool = true)
