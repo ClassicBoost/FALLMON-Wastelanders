@@ -33,6 +33,8 @@ class Main extends Sprite
 
 	public static var fpsCounter:FPS;
 
+	// Happy april first
+
 	// If you don't want the players to cheat or some shit turn these off.
 	public static var devMode:Bool = true;
 
